@@ -1,5 +1,11 @@
 package com.example.kisspk.app_verano;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -32,8 +38,9 @@ import java.util.List;
 
 
 /*public class Lectura_WIFI extends ActionBarActivity*/
-public class MainActivity extends Activity  {
+public class Lectura_WIFI extends Activity  {
     ListView lv;
+    Button btn;
     WifiManager wifi;
     String wifis[];
     WifiScanReceiver wifiReciever;
@@ -41,13 +48,17 @@ public class MainActivity extends Activity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_lectura__wifi);
         lv=(ListView)findViewById(R.id.listView);
+        btn=(Button)findViewById(R.id.button);
+
 
         wifi=(WifiManager)getSystemService(Context.WIFI_SERVICE);
         wifiReciever = new WifiScanReceiver();
         wifi.startScan();
     }
+
+
 
     protected void onPause() {
         unregisterReceiver(wifiReciever);
@@ -62,24 +73,21 @@ public class MainActivity extends Activity  {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_lectura__wifi, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     private class WifiScanReceiver extends BroadcastReceiver{
         public void onReceive(Context c, Intent intent) {
