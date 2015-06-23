@@ -5,6 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Lectura_WIFI"
     android:id="@+id/index">
+
     <TextView android:text="Wifi" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textview"
@@ -17,6 +18,7 @@
         android:layout_height="wrap_content"
         android:text="Finger Print"
         android:id="@+id/textView"
+<<<<<<< HEAD
         android:textColor="#ff7aff24"
         android:textSize="35dp"
         android:layout_below="@+id/textview"
@@ -31,6 +33,13 @@
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
+=======
+        android:layout_below="@+id/textview"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000"
+        android:textSize="35dp" />
+
+>>>>>>> origin/FingerPrint
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,14 +48,31 @@
         android:layout_centerHorizontal="true" />
         <!--android:src="@drawable/abc"-->
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refrescar"
+        android:id="@+id/button"
+        android:layout_alignTop="@+id/textView"
+        android:layout_toRightOf="@+id/textview"
+        android:layout_toEndOf="@+id/textview"
+        android:layout_below="@+id/imageView"/>
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
+<<<<<<< HEAD
         android:background="#fff5d376"
         android:layout_below="@+id/button"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+=======
+        android:layout_below="@+id/button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#fff5d376" />
+>>>>>>> origin/FingerPrint
 
 
 </RelativeLayout>
