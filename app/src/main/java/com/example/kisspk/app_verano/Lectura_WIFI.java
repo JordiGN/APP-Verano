@@ -5,9 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,25 +14,18 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
 /*public class Lectura_WIFI extends ActionBarActivity*/
 public class Lectura_WIFI extends Activity implements View.OnClickListener {
-    /*TextView mainText;*/
     ListView lv;
     WifiManager wifi;
     String wifis[];
     Button btn;
     WifiScanReceiver wifiReciever;
-    /*ArrayList<HashMap<String, String>> arraylist = new ArrayList<HashMap<String, String>>();
-    String ITEM_KEY = "key";*/
-
-    /*StringBuilder sb = new StringBuilder();*/
+    Context ctx;
+    Intent inte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +34,6 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
         lv=(ListView)findViewById(R.id.listView);
         btn= (Button) findViewById(R.id.button);
         btn.setOnClickListener(this);
-
-
         wifi=(WifiManager)getSystemService(Context.WIFI_SERVICE);
         wifiReciever = new WifiScanReceiver();
         wifi.startScan();
@@ -79,6 +68,8 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
 
     private class WifiScanReceiver extends BroadcastReceiver{
         public void onReceive(Context c, Intent intent) {
+            ctx=c;
+            inte=intent;
             List<ScanResult> wifiScanList = wifi.getScanResults();
             wifis = new String[wifiScanList.size()];
 
@@ -92,7 +83,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
     public void onClick(View view)
     {
         WifiScanReceiver ws=new WifiScanReceiver();
-        ws.onReceive(this,this.getIntent());
+        ws.onReceive(ctx,inte);
         /*wifi=(WifiManager)getSystemService(Context.WIFI_SERVICE);
         wifi.startScan();
         List<ScanResult> wifiScanList = wifi.getScanResults();
