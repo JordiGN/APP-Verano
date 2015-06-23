@@ -83,7 +83,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
             wifis = new String[wifiScanList.size()];
 
             for(int i = 0; i < wifiScanList.size(); i++){
-                wifis[i] = ((wifiScanList.get(i).SSID.).toString());
+                wifis[i] = ((wifiScanList.get(i).SSID).toString()+ "  " +(wifiScanList.get(i).level));
             }
             lv.setAdapter(new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,wifis));
         }
@@ -96,7 +96,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
         wifis = new String[wifiScanList.size()];
 
         for(int i = 0; i < wifiScanList.size(); i++){
-            wifis[i] = ((wifiScanList.get(i).SSID).toString());
+            wifis[i] = ((wifiScanList.get(i).SSID).toString()+ "  " +(wifiScanList.get(i).level));
         }
         lv.setAdapter(new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,wifis));
     }
