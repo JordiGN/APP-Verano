@@ -36,10 +36,8 @@
         android:layout_height="wrap_content"
         android:text="Refrescar"
         android:id="@+id/button"
-        android:layout_alignTop="@+id/textView"
-        android:layout_toRightOf="@+id/textview"
-        android:layout_toEndOf="@+id/textview"
-        android:layout_below="@+id/imageView"/>
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
 
     <ListView
         android:layout_width="wrap_content"
