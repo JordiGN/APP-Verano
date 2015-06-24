@@ -103,6 +103,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
 
         if (arg0.equals(btn))
         {wifi.startScan();}
+
         // TODO Auto-generated method stub
         File sdCard, directory, file = null;
 
@@ -146,7 +147,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
 
 
                         Toast.makeText(getBaseContext(),
-                                "La instancia"+(cont-1)+"de la ubicación"+ub+" se ha almacenado!!!",
+                                "La instancia "+(cont-1)+" de la ubicación "+ub+" se ha almacenado!!!",
                                 Toast.LENGTH_SHORT).show();
                         if (cont==4){
                             cont=1;
@@ -161,7 +162,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
                 }
             }else{
                 Toast.makeText(getBaseContext(),
-                        "El almacenamineto externio no se encuentra disponible",
+                        "El almacenamineto externo no se encuentra disponible",
                         Toast.LENGTH_LONG).show();
             }
 
