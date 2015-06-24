@@ -37,7 +37,10 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
     String[] wifis;
     Button btn;
     Button btn2;
+    Button btn3;
     WifiScanReceiver wifiReciever;
+    int cont=1;
+    int ub=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,9 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
         btn.setOnClickListener(this);
         btn2 = (Button) findViewById(R.id.button2);
         btn2.setOnClickListener(this);
+        btn3 = (Button) findViewById(R.id.button3);
+        btn3.setOnClickListener(this);
+
         wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         wifiReciever = new WifiScanReceiver();
         wifi.startScan();
@@ -94,19 +100,23 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
     }
 
     public void onClick(View arg0) {
-        wifi.startScan();
+
+        if (arg0.equals(btn))
+        {wifi.startScan();}
         // TODO Auto-generated method stub
         File sdCard, directory, file = null;
+
+        if (arg0.equals(btn3)){
+            cont=1;
+            ub=1;
+        }
 
         try {
             // validamos si se encuentra montada nuestra memoria externa
             if (Environment.getExternalStorageState().equals("mounted")) {
-
                 // Obtenemos el directorio de la memoria externa
                 sdCard = Environment.getExternalStorageDirectory();
-
                 if (arg0.equals(btn2)) {
-
                     // Clase que permite grabar texto en un archivo
                     FileOutputStream fout = null;
                     try {
@@ -114,20 +124,17 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
                         // directorio
                         // la memoria externa
                         directory = new File(sdCard.getAbsolutePath()
-                                + "/Mis archivos");
+                                + "/Instancias");
                         // se crea el nuevo directorio donde se cerara el
                         // archivo
                         directory.mkdirs();
 
                         // creamos el archivo en el nuevo directorio creado
-                        file = new File(directory, "MiArchivo.txt");
-
+                        file = new File(directory, "Ubicación"+(ub)+"_"+(cont++)+".txt");
                         fout = new FileOutputStream(file);
-
                         // Convierte un stream de caracteres en un stream de
                         // bytes
-
-                        OutputStreamWriter ows = new OutputStreamWriter(fout);
+                       OutputStreamWriter ows = new OutputStreamWriter(fout);
                         //se crea un arraylist para poder hacer las iteraciones
 
                         for (String nombre : wifis) {
@@ -137,9 +144,14 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
                         ows.flush(); // Volca lo que hay en el buffer al archivo
                         ows.close(); // Cierra el archivo de texto
 
+
                         Toast.makeText(getBaseContext(),
-                                "El archivo se ha almacenado!!!",
+                                "La instancia"+(cont-1)+"de la ubicación"+ub+" se ha almacenado!!!",
                                 Toast.LENGTH_SHORT).show();
+                        if (cont==4){
+                            cont=1;
+                            ub++;
+                        }
 
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
