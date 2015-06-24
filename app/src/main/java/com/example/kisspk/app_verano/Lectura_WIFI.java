@@ -24,8 +24,8 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
     String wifis[];
     Button btn;
     WifiScanReceiver wifiReciever;
-    Context ctx;
-    Intent inte;
+    /*Context ctx;
+    Intent inte;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +68,6 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
 
     private class WifiScanReceiver extends BroadcastReceiver{
         public void onReceive(Context c, Intent intent) {
-            ctx=c;
-            inte=intent;
             List<ScanResult> wifiScanList = wifi.getScanResults();
             wifis = new String[wifiScanList.size()];
 
@@ -78,21 +76,13 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
             }
             lv.setAdapter(new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,wifis));
         }
+
     }
 
     public void onClick(View view)
     {
-        WifiScanReceiver ws=new WifiScanReceiver();
-        ws.onReceive(ctx,inte);
-        /*wifi=(WifiManager)getSystemService(Context.WIFI_SERVICE);
         wifi.startScan();
-        List<ScanResult> wifiScanList = wifi.getScanResults();
-        wifis = new String[wifiScanList.size()];
-
-        for(int i = 0; i < wifiScanList.size(); i++){
-            wifis[i] = ((wifiScanList.get(i).BSSID).toString()+ "," +(wifiScanList.get(i).level));
-        }
-        lv.setAdapter(new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,wifis));*/
-
     }
+
+
 }
