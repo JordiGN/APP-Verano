@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //clases importadas para guardar datos
@@ -26,18 +25,15 @@ import java.io.OutputStreamWriter;
 import android.os.Environment;
 import android.widget.Toast;
 
-//Para el uso de itertor
-import java.util.Iterator;
-
 
 /*public class Lectura_WIFI extends ActionBarActivity*/
 public class Lectura_WIFI extends Activity implements View.OnClickListener {
     ListView lv;
     WifiManager wifi;
     String[] wifis;
-    Button btn;
-    Button btn2;
-    Button btn3;
+    Button btn;//botón para volver a hacer un escaneo
+    Button btn2;//botón para guardar el scanresult actual
+    Button btn3;//botón para reiniciar el contador de ubicación y de instancia
     WifiScanReceiver wifiReciever;
     int cont=1;
     int ub=1;
@@ -121,7 +117,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
                     // Clase que permite grabar texto en un archivo
                     FileOutputStream fout = null;
                     try {
-                        // instanciamos un onjeto File para crear un nuevo
+                        // instanciamos un objeto File para crear un nuevo
                         // directorio
                         // la memoria externa
                         directory = new File(sdCard.getAbsolutePath()
