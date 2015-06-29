@@ -40,11 +40,18 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
     WifiScanReceiver wifiReciever;
     int cont=1;
     int ub=1;
+<<<<<<< HEAD
     int j=0;
     int y=0;
     //String t1,t2;
     int tam1,tam2;
     String[] wf2;
+=======
+    String red,red2;
+    String[] wifi1, wifi2,wifiR;
+    int ban=0;
+
+>>>>>>> origin/FingerPrint
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +67,8 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
 
         wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         wifiReciever = new WifiScanReceiver();
-        wifi.startScan();
+
+        /*wifi.startScan();*/
     }
 
     protected void onPause() {
@@ -93,6 +101,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
     private class WifiScanReceiver extends BroadcastReceiver {
         public void onReceive(Context c, Intent intent) {
             List<ScanResult> wifiScanList = wifi.getScanResults();
+<<<<<<< HEAD
 
             contar++;
             //Toast.makeText(getBaseContext(), "El contar esta en "+contar +" !!", Toast.LENGTH_SHORT).show();
@@ -171,15 +180,44 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
                 tam1=wifis.length;
             }
 
+=======
+            if (ban==0){
+                wifi1 = new String[wifiScanList.size()];
+                Toast.makeText(getBaseContext(),
+                        "Array 1",
+                        Toast.LENGTH_LONG).show();
+                for (int i = 0; i < wifiScanList.size(); i++) {
+                    wifi1[i] = ((wifiScanList.get(i).BSSID).toString() + "," + (wifiScanList.get(i).level));
+                }
+                lv.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, wifi1));
+                ban=1;
+            }else{
+                wifi2 = new String[wifiScanList.size()];
+                Toast.makeText(getBaseContext(),
+                        "Array 2",
+                        Toast.LENGTH_LONG).show();
+                for (int i = 0; i < wifiScanList.size(); i++) {
+                    wifi2[i] = ((wifiScanList.get(i).BSSID).toString() + "," + (wifiScanList.get(i).level));
+                }
+                lv.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, wifi2));
+            }
+>>>>>>> origin/FingerPrint
         }
-
     }
 
     public void onClick(View arg0) {
 
+<<<<<<< HEAD
         if (arg0.equals(btn))
         {
             wifi.startScan();
+=======
+
+        if (arg0.equals(btn)) {
+            //Primer escaneo
+            wifi.startScan();
+
+>>>>>>> origin/FingerPrint
         }
 
         // TODO Auto-generated method stub
@@ -188,6 +226,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
         if (arg0.equals(btn3)){
             cont=1;
             ub=1;
+            ban=0;
         }
 
         try
@@ -197,6 +236,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
             {
                 // Obtenemos el directorio de la memoria externa
                 sdCard = Environment.getExternalStorageDirectory();
+<<<<<<< HEAD
                 if (arg0.equals(btn2))
                 {
                     if(contar==2)
@@ -212,6 +252,110 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
                             // se crea el nuevo directorio donde se cerara el
                             // archivo
                             directory.mkdirs();
+=======
+                if (arg0.equals(btn2)) {
+                    //Crear variables para intensidad y mac
+                    String[] redes;
+                    String[] redes2;
+                    String mac;
+                    int intensidad;
+                    String mac2;
+                    int intensidad2;
+                    int intensidadN =0;
+                    //Método para generar un solo array para almacenarlo en la instancia
+                    //Creación del vector resultante para almacenar los nuevos datos
+                    //Él vector resultante tendrá el tamaño del array más grande
+                    if (wifi1.length<wifi2.length){
+                        wifiR= new String[wifi2.length];
+                        Toast.makeText(getBaseContext(),
+                                "El array 2 es más grande",
+                                Toast.LENGTH_LONG).show();
+
+                        //Recorrer primer vector para comparar
+                        for (int i=0; i<=wifi2.length;i++){
+                            red=wifi2[i];
+                            redes = red.split(",");
+                            mac=redes[0];
+                            intensidad=Integer.parseInt(redes[1]);
+                            //Recorrer segundo vector para poder comparar con el primero
+                            for (int i2=0;i2<=wifi1.length;i2++){
+                                red2=wifi1[i2];
+                                redes2 = red2.split(",");
+                                mac2=redes2[0];
+                                intensidad2=Integer.parseInt(redes2[1]);
+                                if (mac.equals(mac2)){
+                                    intensidadN=((intensidad2+intensidad)/2);
+                                    Toast.makeText(getBaseContext(),
+                                            "encontro una coincidencia "+mac+" es igual "+mac2+"intensidad nueva "+intensidadN,
+                                            Toast.LENGTH_LONG).show();
+                                    i2=wifi1.length;
+                                }
+                                wifiR[i]=(mac.toString()+","+intensidadN);
+                                Toast.makeText(getBaseContext(),
+                                        "encontro una coincidencia "+mac+" es igual "+mac2+"intensidad nueva "+intensidadN,
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }else{
+                        wifiR= new String[wifi1.length];
+                        Toast.makeText(getBaseContext(),
+                                "El array 1 es más grande",
+                                Toast.LENGTH_LONG).show();
+                        //Recorrer primer vector para comparar
+                        for (int i=0; i<=wifi1.length;i++){
+                            red=wifi1[i];
+                            redes = red.split(",");
+                            mac=redes[0];
+                            intensidad=Integer.parseInt(redes[1]);
+                            Toast.makeText(getBaseContext(),
+                                    "mac es "+mac+" intensidad es "+intensidad,
+                                    Toast.LENGTH_LONG).show();
+                            //Recorrer segundo vector para poder comparar con el primero
+                            for (int i2=0;i2<=wifi2.length;i2++){
+                                red2=wifi2[i2];
+                                redes2 = red2.split(",");
+                                mac2=redes2[0];
+                                intensidad2=Integer.parseInt(redes2[1]);
+                                if (mac.equals(mac2)){
+                                    intensidad=((intensidad2+intensidad)/2);
+                                    Toast.makeText(getBaseContext(),
+                                            "encontro una coincidencia "+mac+" es igual "+mac2+"intensidad nueva "+intensidad,
+                                            Toast.LENGTH_LONG).show();
+                                    i2=wifi2.length;
+                                }
+                                wifiR[i]=(mac.toString()+","+intensidad);
+                            }
+                        }
+                    }
+                    // Clase que permite grabar texto en un archivo
+                    FileOutputStream fout = null;
+                    try {
+                        // instanciamos un objeto File para crear un nuevo
+                        // directorio
+                        // la memoria externa
+                        directory = new File(sdCard.getAbsolutePath()
+                                + "/Instancias");
+                        // se crea el nuevo directorio donde se cerara el
+                        // archivo
+                        directory.mkdirs();
+
+                        // creamos el archivo en el nuevo directorio creado
+                        file = new File(directory, "Ubicación"+(ub)+"_"+(cont++)+".txt");
+                        fout = new FileOutputStream(file);
+                        // Convierte un stream de caracteres en un stream de
+                        // bytes
+                       OutputStreamWriter ows = new OutputStreamWriter(fout);
+                        //se crea un arraylist para poder hacer las iteraciones
+
+
+                        for (String nombre : wifiR) {
+                            ows.write(nombre.toString()+"\n");
+                        }
+
+                        // Escribe en el buffer la cadena de texto
+                        ows.flush(); // Volca lo que hay en el buffer al archivo
+                        ows.close(); // Cierra el archivo de texto
+>>>>>>> origin/FingerPrint
 
                             // creamos el archivo en el nuevo directorio creado
                             file = new File(directory, "Ubicación" + (ub) + "_" + (cont++) + ".txt");
