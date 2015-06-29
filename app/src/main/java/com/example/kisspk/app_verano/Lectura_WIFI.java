@@ -195,6 +195,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
 
                     if (arg0.equals(btn2)) {
                         if (contar == 2) {
+                            contar=0;
                             // Clase que permite grabar texto en un archivo
                             FileOutputStream fout = null;
                             try {
