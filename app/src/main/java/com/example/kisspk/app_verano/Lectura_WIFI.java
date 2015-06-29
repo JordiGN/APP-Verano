@@ -61,7 +61,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
         wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         wifiReciever = new WifiScanReceiver();
 
-        /*wifi.startScan();*/
+        wifi.startScan();
     }
 
     protected void onPause() {
