@@ -31,7 +31,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
     String[] wifis;
     String[] wifis2;
     String[] wifistemp;
-    int contar=1;
+    int contar=0;
     Button btn;//botón para volver a hacer un escaneo
     Button btn2;//botón para guardar el scanresult actual
     Button btn3;//botón para reiniciar el contador de ubicación y de instancia
@@ -195,7 +195,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
 
                     if (arg0.equals(btn2)) {
                         if (contar == 2) {
-                            contar=1;
+                            contar=0;
                             // Clase que permite grabar texto en un archivo
                             FileOutputStream fout = null;
                             try {
@@ -226,11 +226,6 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
                                 Toast.makeText(getBaseContext(),
                                         "La instancia " + (cont - 1) + " de la ubicación " + ub + " se ha almacenado!!!",
                                         Toast.LENGTH_SHORT).show();
-
-                                if (cont==4){
-                                    cont=1;
-                                    ub++;
-                                }
 
                             } catch (IOException e) {
                                 // TODO Auto-generated catch block
