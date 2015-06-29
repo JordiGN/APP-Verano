@@ -14,9 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
 import java.util.List;
-
 //clases importadas para guardar datos
 import java.io.File;
 import java.io.FileOutputStream;
@@ -94,7 +92,6 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
     private class WifiScanReceiver extends BroadcastReceiver {
         public void onReceive(Context c, Intent intent) {
             List<ScanResult> wifiScanList = wifi.getScanResults();
-
 
             contar++;
             //Toast.makeText(getBaseContext(), "El contar esta en "+contar +" !!", Toast.LENGTH_SHORT).show();
@@ -180,14 +177,8 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
 
         if (arg0.equals(btn)) {
             wifi.startScan();
+        }
 
-
-            if (arg0.equals(btn)) {
-                //Primer escaneo
-                wifi.startScan();
-
-
-            }
 
             // TODO Auto-generated method stub
             File sdCard, directory, file = null;
@@ -257,4 +248,3 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
             }
         }
     }
-}
