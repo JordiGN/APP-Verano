@@ -8,11 +8,13 @@ import android.content.IntentFilter;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import java.util.List;
 //clases importadas para guardar datos
@@ -31,16 +33,17 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
     String[] wifis;
     String[] wifis2;
     String[] wifistemp;
-    int contar=0;
+    int contar=1;
     Button btn;//botón para volver a hacer un escaneo
     Button btn2;//botón para guardar el scanresult actual
     Button btn3;//botón para reiniciar el contador de ubicación y de instancia
     WifiScanReceiver wifiReciever;
     int cont=1;
-    int ub=1;
+    String ub;
     int j=0;
     int tam1,tam2;
     String[] wf2;
+    EditText text;
 
 
 
@@ -53,13 +56,10 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
         btn.setOnClickListener(this);
         btn2 = (Button) findViewById(R.id.button2);
         btn2.setOnClickListener(this);
-        btn3 = (Button) findViewById(R.id.button3);
-        btn3.setOnClickListener(this);
-
         wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         wifiReciever = new WifiScanReceiver();
 
-        wifi.startScan();
+       /* wifi.startScan();*/
     }
 
     protected void onPause() {
@@ -93,8 +93,8 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
         public void onReceive(Context c, Intent intent) {
             List<ScanResult> wifiScanList = wifi.getScanResults();
 
-            contar++;
-            //Toast.makeText(getBaseContext(), "El contar esta en "+contar +" !!", Toast.LENGTH_SHORT).show();
+            /*contar++;*/
+            Toast.makeText(getBaseContext(), "El contar esta en "+contar +" !!", Toast.LENGTH_SHORT).show();
             if(contar==2){
                 wifis2= new String[wifiScanList.size()];
             }else{
@@ -162,40 +162,51 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
                     }
                     j++;
                 }
-
+                Toast.makeText(getBaseContext(),
+                        "La instancia "+cont+" está lista, presiona guardar",
+                        Toast.LENGTH_LONG).show();
+                handler.removeCallbacks(runnable);
             }else {
                 //Mostrar la lista
                 lv.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, wifis));
                 tam1=wifis.length;
+                contar=2;
             }
-
         }
     }
 
-    public void onClick(View arg0) {
-
-
-        if (arg0.equals(btn)) {
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+      /* do what you need to do */
             wifi.startScan();
+      /* and here comes the "trick" */
+            handler.postDelayed(this, 1000);
         }
+    };
 
-
-            // TODO Auto-generated method stub
-            File sdCard, directory, file = null;
-            if (arg0.equals(btn3)) {
-                cont = 1;
-                ub = 1;
-            }
-
+    public void onClick(View arg0) {
+    // TODO Auto-generated method stub
+        File sdCard, directory, file = null;
+        if (arg0.equals(btn)) {
+            handler.postDelayed(runnable, 1000);
+        }
             try {
+                EditText text = (EditText)findViewById(R.id.editText);
+                ub = text.getText().toString().trim();
                 // validamos si se encuentra montada nuestra memoria externa
                 if (Environment.getExternalStorageState().equals("mounted")) {
                     // Obtenemos el directorio de la memoria externa
                     sdCard = Environment.getExternalStorageDirectory();
 
                     if (arg0.equals(btn2)) {
+                        Toast.makeText(getBaseContext(), "Entró al boton !!", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getBaseContext(), "La ubicación es: "+ub +" !!", Toast.LENGTH_SHORT).show();
+
                         if (contar == 2) {
-                            contar=0;
+                            contar=1;
                             // Clase que permite grabar texto en un archivo
                             FileOutputStream fout = null;
                             try {
@@ -209,7 +220,8 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
 
 
                                 // creamos el archivo en el nuevo directorio creado
-                                file = new File(directory, "Ubicación" + (ub) + "_" + (cont++) + ".txt");
+                                file = new File(directory, (ub) + "_" + (cont) + ".txt");
+                                cont=cont+1;
                                 fout = new FileOutputStream(file);
                                 // Convierte un stream de caracteres en un stream de bytes
                                 OutputStreamWriter ows = new OutputStreamWriter(fout);
@@ -226,6 +238,9 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
                                 Toast.makeText(getBaseContext(),
                                         "La instancia " + (cont - 1) + " de la ubicación " + ub + " se ha almacenado!!!",
                                         Toast.LENGTH_SHORT).show();
+                                if (cont==4){
+                                    cont=1;
+                                }
 
                             } catch (IOException e) {
                                 // TODO Auto-generated catch block
