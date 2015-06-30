@@ -195,6 +195,7 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
             try {
                 EditText text = (EditText)findViewById(R.id.editText);
                 ub = text.getText().toString().trim();
+                text.setFocusable(false);
                 // validamos si se encuentra montada nuestra memoria externa
                 if (Environment.getExternalStorageState().equals("mounted")) {
                     // Obtenemos el directorio de la memoria externa
@@ -240,6 +241,11 @@ public class Lectura_WIFI extends Activity implements View.OnClickListener {
                                         Toast.LENGTH_SHORT).show();
                                 if (cont==4){
                                     cont=1;
+                                    Toast.makeText(getBaseContext(),
+                                            "La instancias de la ubicación " + ub + " se han completado, ingresa una nueva ubicación",
+                                            Toast.LENGTH_SHORT).show();
+                                    text.setFocusableInTouchMode(true);
+                                    handler.removeCallbacks(runnable);
                                 }
 
                             } catch (IOException e) {
