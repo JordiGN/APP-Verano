@@ -28,17 +28,17 @@ import android.widget.Toast;
 
 
 //public class  extends ActionBarActivity {
-public class Train_Set extends Activity implements View.OnClickListener {
-
+public class Train_Set extends Activity implements View.OnClickListener
+{
     ListView lv;
     WifiManager wifi;
     String[] wifis;
     String[] wifis2;
     String[] wifistemp;
     int contar=1;
-    Button btn;//botón para volver a hacer un escaneo
-    Button btn2;//botón para guardar el scanresult actual
-    Button btn3;//botón para reiniciar el contador de ubicación y de instancia
+    Button btn;//botn para volver a hacer un escaneo
+    Button btn2;//botn para guardar el scanresult actual
+    Button btn3;//botn para reiniciar el contador de ubicacin y de instancia
     WifiScanReceiver wifiReciever;
     int cont=1;
     String ub;
@@ -58,7 +58,7 @@ public class Train_Set extends Activity implements View.OnClickListener {
         btn2.setOnClickListener(this);
         wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         wifiReciever = new WifiScanReceiver();
-        /* wifi.startScan();*/
+        /*wifi.startScan();*/
     }
 
 
@@ -98,7 +98,7 @@ public class Train_Set extends Activity implements View.OnClickListener {
             List<ScanResult> wifiScanList = wifi.getScanResults();
 
             /*contar++;*/
-            Toast.makeText(getBaseContext(), "El contar esta en "+contar +" !!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getBaseContext(), "El contar esta en "+contar +" !!", Toast.LENGTH_SHORT).show();
             if(contar==2){
                 wifis2= new String[wifiScanList.size()];
             }else{
@@ -167,7 +167,7 @@ public class Train_Set extends Activity implements View.OnClickListener {
                     j++;
                 }
                 Toast.makeText(getBaseContext(),
-                        "La instancia "+cont+" está lista, presiona guardar",
+                        "La instancia "+cont+" esta lista, presiona guardar",
                         Toast.LENGTH_LONG).show();
                 handler.removeCallbacks(runnable);
             }else {
@@ -206,9 +206,9 @@ public class Train_Set extends Activity implements View.OnClickListener {
                 sdCard = Environment.getExternalStorageDirectory();
 
                 if (arg0.equals(btn2)) {
-                    Toast.makeText(getBaseContext(), "Entró al boton !!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), "Entro al boton !!", Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(getBaseContext(), "La ubicación es: "+ub +" !!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "La ubicacion es: "+ub +" !!", Toast.LENGTH_SHORT).show();
 
                     if (contar == 2) {
                         contar=1;
@@ -241,12 +241,12 @@ public class Train_Set extends Activity implements View.OnClickListener {
                             ows.close(); // Cierra el archivo de texto
 
                             Toast.makeText(getBaseContext(),
-                                    "La instancia " + (cont - 1) + " de la ubicación " + ub + " se ha almacenado!!!",
+                                    "La instancia " + (cont - 1) + " de la ubicacion " + ub + " se ha almacenado!!!",
                                     Toast.LENGTH_SHORT).show();
                             if (cont==4){
                                 cont=1;
                                 Toast.makeText(getBaseContext(),
-                                        "La instancias de la ubicación " + ub + " se han completado, ingresa una nueva ubicación",
+                                        "La instancias de la ubicacion " + ub + " se han completado, ingresa una nueva ubicacion",
                                         Toast.LENGTH_SHORT).show();
                                 text.setFocusableInTouchMode(true);
                                 handler.removeCallbacks(runnable);
