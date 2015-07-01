@@ -20,13 +20,14 @@
         android:text="Test Set"
         android:id="@+id/TestSet"
         android:textSize="25dp"
-        android:background="#ff01a187"
+        android:background="#0099DF"
         android:textColor="#ffffffff"
         android:layout_below="@+id/TrainSet"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="tue"
         android:layout_marginTop="71dp"
-        android:width="150dp" />
+        android:width="150dp"
+        android:onClick="goTest"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -35,12 +36,13 @@
         android:id="@+id/TrainSet"
         android:layout_marginTop="70dp"
         android:textSize="25dp"
-        android:background="#ff01a187"
+        android:background="#0099DF"
         android:textColor="#ffffffff"
         android:width="150dp"
         android:layout_below="@+id/textView2"
         android:layout_alignLeft="@+id/TestSet"
-        android:layout_alignStart="@+id/TestSet" />
+        android:layout_alignStart="@+id/TestSet"
+        android:onClick="goTrain"/>
 
     <TextView
         android:layout_width="wrap_content"

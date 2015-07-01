@@ -8,18 +8,18 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-public class MenuPrincipal extends ActionBarActivity {
+public class Test_set extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_principal);
+        setContentView(R.layout.activity_test_set);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_menu_principal, menu);
+        getMenuInflater().inflate(R.menu.menu_test_set, menu);
         return true;
     }
 
@@ -37,12 +37,8 @@ public class MenuPrincipal extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void goTrain(View v){
-        Intent act = new Intent(this, Train_Set.class);
-        startActivity(act);
-    }
-    public void goTest(View v){
-        Intent act = new Intent(this, Test_set.class);
+    public void goHome(View v){
+        Intent act = new Intent(this, MenuPrincipal.class);
         startActivity(act);
     }
 }

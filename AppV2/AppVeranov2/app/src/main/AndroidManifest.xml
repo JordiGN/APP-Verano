@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Train_Set"
+            android:label="@string/title_activity_train__set" >
+        </activity>
+        <activity
+            android:name=".Test_set"
+            android:label="@string/title_activity_test_set" >
+        </activity>
     </application>
 
 </manifest>
