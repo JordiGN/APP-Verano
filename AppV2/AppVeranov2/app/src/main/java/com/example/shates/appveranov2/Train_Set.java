@@ -160,7 +160,7 @@ public class Train_Set extends Activity implements View.OnClickListener
                         if(mac1.equals(mac2)){
                             int intetemp=((inten1+inte2)/2);
                             String it=Integer.toString(intetemp);
-                            wifistemp[j]=mac1+it;
+                            wifistemp[j]=mac1+','+it;
                             x=wf2.length;
                         }
                     }
