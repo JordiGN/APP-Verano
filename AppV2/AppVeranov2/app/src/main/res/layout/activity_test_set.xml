@@ -13,9 +13,9 @@
         android:textSize="35dp"
         android:textStyle="bold"
         android:textColor="#ff01cd6a"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView5" />
+        android:id="@+id/textView5"
+        android:layout_above="@+id/textView4"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
         android:id="@+id/textView4"
         android:textSize="25dp"
         android:textColor="#ff01a187"
-        android:layout_below="@+id/textView5"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -42,24 +42,5 @@
         android:textColor="#ffffffff"
         android:width="80dp" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/try2"
-        android:id="@+id/listView2"
-        android:background="#ffff3059"
-        android:layout_above="@+id/button4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="34dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ver lista Archivos"
-        android:id="@+id/button5"
-        android:layout_below="@+id/textView4"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
-        android:onClick="olarch"/>
 
 </RelativeLayout>

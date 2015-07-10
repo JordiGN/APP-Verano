@@ -123,7 +123,7 @@ public class Train_Set extends Activity implements View.OnClickListener
                 //Mostrar la lista
                 lv.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, wifis2));
                 tam2=wifis2.length;
-                if(tam1>tam2){
+                if(tam1<tam2){
                     wifistemp= new String[tam2];
                     for(int b=0;b<tam2;b++){
                         wifistemp[b]=wifis2[b];
@@ -243,7 +243,7 @@ public class Train_Set extends Activity implements View.OnClickListener
                             Toast.makeText(getBaseContext(),
                                     "La instancia " + (cont - 1) + " de la ubicacion " + ub + " se ha almacenado!!!",
                                     Toast.LENGTH_SHORT).show();
-                            if (cont==4){
+                            if (cont==6){
                                 cont=1;
                                 Toast.makeText(getBaseContext(),
                                         "La instancias de la ubicacion " + ub + " se han completado, ingresa una nueva ubicacion",
